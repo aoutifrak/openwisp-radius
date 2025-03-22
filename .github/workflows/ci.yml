@@ -57,6 +57,14 @@ jobs:
           pip install -U -r requirements-test.txt
           pip install -e .[saml,openvpn_status,selenium]
           pip install ${{ matrix.django-version }}
+      
+      - name: Install Firefox and Geckodriver
+        run: |
+          sudo apt-get install -y firefox
+          wget https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-linux64.tar.gz
+          tar -xvzf geckodriver-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+          geckodriver --version
 
       - name: Start InfluxDB and Redis container
         run: docker compose up -d influxdb redis
