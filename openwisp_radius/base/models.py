@@ -1345,7 +1345,10 @@ class AbstractPhoneToken(TimeStampedEditableModel):
         verbose_name = _('Phone verification token')
         verbose_name_plural = _('Phone verification tokens')
         ordering = ('-created',)
-        index_together = (('user', 'created'), ('user', 'created', 'ip'))
+        indexes = [
+            models.Index(fields=['user', 'created']),  # Index on (user, created)
+            models.Index(fields=['user', 'created', 'ip']),  # Index on (user, created, ip)
+        ]
         abstract = True
 
     def clean(self):

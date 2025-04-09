@@ -30,7 +30,13 @@ class BasicTest(
         try:
             self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
         finally:
-            self.open(f'{self.live_server_url}/admin/openwisp_radius/radiusbatch/add/')
+            url = reverse("admin:openwisp_radius_radiusbatch_add")
+
+            # Ensure the URL is relative before appending live_server_url
+            if not url.startswith("http"):
+                url = f"{self.live_server_url}{url}"
+
+            self.open(url)
 
         # Set user strategy for batch creation to 'prefix'
         dropdown = self.wait_for_visibility(By.ID, 'id_strategy', 10)
@@ -80,8 +86,14 @@ class BasicTest(
         # Navigate to radius batch creation page
         try:
             self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
-        finally:
-            self.open(f'{self.live_server_url}/admin/openwisp_radius/radiusbatch/add/')
+        finally: 
+            url = reverse("admin:openwisp_radius_radiusbatch_add")
+
+            # Ensure the URL is relative before appending live_server_url
+            if not url.startswith("http"):
+                url = f"{self.live_server_url}{url}"
+
+            self.open(url)
 
         # Set strategy to CSV for importing users
         dropdown = self.find_element(By.ID, 'id_strategy', 10)
@@ -131,7 +143,13 @@ class BasicTest(
         try:
             self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
         finally:
-            self.open(f'{self.live_server_url}/admin/openwisp_radius/radiusbatch/add/')
+            url = reverse("admin:openwisp_radius_radiusbatch_add")
+
+            # Ensure the URL is relative before appending live_server_url
+            if not url.startswith("http"):
+                url = f"{self.live_server_url}{url}"
+
+            self.open(url)
 
         # Set strategy to CSV for importing users
         dropdown = self.find_element(By.ID, 'id_strategy', 10)
@@ -179,7 +197,13 @@ class BasicTest(
         try:
             self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
         finally:
-            self.open(f'{self.live_server_url}/admin/openwisp_radius/radiusbatch/add/')
+            url = reverse("admin:openwisp_radius_radiusbatch_add")
+
+            # Ensure the URL is relative before appending live_server_url
+            if not url.startswith("http"):
+                url = f"{self.live_server_url}{url}"
+
+            self.open(url)
 
         # Set strategy to 'csv' for user generation
         dropdown = self.find_element(By.ID, 'id_strategy', 10)
