@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.urls import reverse
 from selenium.webdriver.common.by import By
@@ -6,28 +7,27 @@ from selenium.webdriver.support.ui import Select
 from openwisp_users.tests.utils import TestOrganizationMixin
 from openwisp_utils.tests.selenium import SeleniumTestMixin
 
-from . import FileMixin
 from ..utils import load_model
-from django.contrib.auth import get_user_model
+from . import FileMixin
+
 User = get_user_model()
 
 OrganizationRadiusSettings = load_model('OrganizationRadiusSettings')
 
+
 class BasicTest(
     SeleniumTestMixin, FileMixin, StaticLiveServerTestCase, TestOrganizationMixin
 ):
-
     # Test case for batch user creation
     def test_batch_user_creation(self):
         """Test the batch user creation feature"""
         org = self._create_org()
-        # add org to OrganizationRadiusSettings to avoid non related obj err 
-        OrganizationRadiusSettings.objects.create(organization=org) 
+        # add org to OrganizationRadiusSettings to avoid non related obj err
+        OrganizationRadiusSettings.objects.create(organization=org)
         self.login()  # Log into the admin interface
-        
+
         # Navigate to the radius batch creation page
         self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
-
         # Set user strategy for batch creation to 'prefix'
         dropdown = self.wait_for_visibility(By.ID, 'id_strategy', 10)
         select = Select(dropdown)
@@ -63,20 +63,18 @@ class BasicTest(
         queryset = User.objects.filter(username__startswith='test-user-')
         self.assertEqual(queryset.count(), 5)
 
-
     def test_standard_csv_import(self):
         """Test standard user import from CSV with all fields provided"""
         org = self._create_org()
-        # add org to OrganizationRadiusSettings to avoid non related obj err 
-        OrganizationRadiusSettings.objects.create(organization=org) 
+        # add org to OrganizationRadiusSettings to avoid non related obj err
+        OrganizationRadiusSettings.objects.create(organization=org)
         self.login()  # Log into the admin interface
 
         # Get the path of the CSV file for user import
-        csv_file = self._get_path('static/users.csv')
+        csv_file = self._get_path('static/selenium/test_standard_csv_import.csv')
 
         # Navigate to radius batch creation page
         self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
-
         # Set strategy to CSV for importing users
         dropdown = self.find_element(By.ID, 'id_strategy', 10)
         select = Select(dropdown)
@@ -112,16 +110,17 @@ class BasicTest(
     def test_import_with_hashed_passwords(self):
         """Test user import with Django-formatted hashed passwords"""
         org = self._create_org()
-        # add org to OrganizationRadiusSettings to avoid non related obj err 
-        OrganizationRadiusSettings.objects.create(organization=org) 
+        # add org to OrganizationRadiusSettings to avoid non related obj err
+        OrganizationRadiusSettings.objects.create(organization=org)
         self.login()  # Log into the admin interface
 
         # Get the path of the CSV file with hashed passwords
-        csv_file = self._get_path('static/user_with_hash.csv')
+        csv_file = self._get_path(
+            'static/selenium/test_import_with_hashed_passwords.csv'
+        )
 
         # Navigate to radius batch creation page
         self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
-
         # Set strategy to CSV for importing users
         dropdown = self.find_element(By.ID, 'id_strategy', 10)
         select = Select(dropdown)
@@ -157,16 +156,15 @@ class BasicTest(
     def test_csv_user_generation(self):
         """Test user generation with CSV upload"""
         org = self._create_org()
-        # add org to OrganizationRadiusSettings to avoid non related obj err 
-        OrganizationRadiusSettings.objects.create(organization=org) 
+        # add org to OrganizationRadiusSettings to avoid non related obj err
+        OrganizationRadiusSettings.objects.create(organization=org)
         self.login()  # Log into the admin interface
 
         # Get the path of the CSV file
-        csv_file = self._get_path('static/csv_user_gen.csv')
+        csv_file = self._get_path('static/selenium/test_csv_user_generation.csv')
 
         # Navigate to radius batch creation page
         self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
-
         # Set strategy to 'csv' for user generation
         dropdown = self.find_element(By.ID, 'id_strategy', 10)
         select = Select(dropdown)
@@ -197,4 +195,3 @@ class BasicTest(
         # Verify that the users were created
         queryset = User.objects.filter(username__startswith='csv-user')
         self.assertEqual(queryset.count(), 3)
-     

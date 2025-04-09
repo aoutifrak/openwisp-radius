@@ -51,6 +51,7 @@ from openwisp_radius.tests.test_saml.test_views import (
 from openwisp_radius.tests.test_saml.test_views import (
     TestLoginView as BaseTestLoginView,
 )
+from openwisp_radius.tests.test_selenium import BasicTest
 from openwisp_radius.tests.test_social import TestSocial as BaseTestSocial
 from openwisp_radius.tests.test_token import TestPhoneToken as BaseTestPhoneToken
 from openwisp_radius.tests.test_token import TestRadiusToken as BaseTestRadiusToken
@@ -65,6 +66,10 @@ from openwisp_radius.tests.test_utils import TestUtils as BaseTestUtils
 additional_fields = [
     ('social_security_number', '123-45-6789'),
 ]
+
+
+class BrowserTest(BasicTest):
+    pass
 
 
 class TestAdmin(BaseTestAdmin):
