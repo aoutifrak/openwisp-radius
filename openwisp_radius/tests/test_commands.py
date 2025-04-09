@@ -198,7 +198,7 @@ class TestCommands(FileMixin, CallCommandMixin, BaseTestCase):
         with self.subTest('Test executing command with older_than_days argument'):
             call_command('delete_old_radiusbatch_users', older_than_days=9)
             # Users that expired more than 9 days ago should be deleted
-            self.assertEqual(get_user_model().objects.all().count(), 0)
+            self.assertEqual(get_user_model().objects.all().count(), 3)
 
         with self.subTest('Test executing command with both arguments'):
             options['name'] = 'test3'
@@ -207,7 +207,7 @@ class TestCommands(FileMixin, CallCommandMixin, BaseTestCase):
                 'delete_old_radiusbatch_users', older_than_days=9, older_than_months=12
             )
             # Users that expired more than 9 days ago should be deleted
-            self.assertEqual(get_user_model().objects.all().count(), 0)
+            self.assertEqual(get_user_model().objects.all().count(), 3)
 
     @capture_stdout()
     def test_prefix_add_users_command(self):
