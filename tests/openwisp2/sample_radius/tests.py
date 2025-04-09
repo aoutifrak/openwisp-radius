@@ -3,6 +3,7 @@ from openwisp_radius.tests.test_api.test_api import TestApi as BaseTestApi
 from openwisp_radius.tests.test_api.test_freeradius_api import (
     TestApiReject as BaseTestApiReject,
 )
+from openwisp_radius.tests.test_selenium import BasicTest
 from openwisp_radius.tests.test_api.test_freeradius_api import (
     TestAutoGroupname as BaseTestAutoGroupname,
 )
@@ -61,7 +62,6 @@ from openwisp_radius.tests.test_users_integration import (
     TestUsersIntegration as BaseTestUsersIntegration,
 )
 from openwisp_radius.tests.test_utils import TestUtils as BaseTestUtils
-from openwisp_radius.tests.test_selenium import BasicTest
 
 additional_fields = [
     ('social_security_number', '123-45-6789'),
