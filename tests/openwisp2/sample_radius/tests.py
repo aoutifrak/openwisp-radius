@@ -3,7 +3,6 @@ from openwisp_radius.tests.test_api.test_api import TestApi as BaseTestApi
 from openwisp_radius.tests.test_api.test_freeradius_api import (
     TestApiReject as BaseTestApiReject,
 )
-from openwisp_radius.tests.test_selenium import BasicTest
 from openwisp_radius.tests.test_api.test_freeradius_api import (
     TestAutoGroupname as BaseTestAutoGroupname,
 )
@@ -52,6 +51,7 @@ from openwisp_radius.tests.test_saml.test_views import (
 from openwisp_radius.tests.test_saml.test_views import (
     TestLoginView as BaseTestLoginView,
 )
+from openwisp_radius.tests.test_selenium import BasicTest
 from openwisp_radius.tests.test_social import TestSocial as BaseTestSocial
 from openwisp_radius.tests.test_token import TestPhoneToken as BaseTestPhoneToken
 from openwisp_radius.tests.test_token import TestRadiusToken as BaseTestRadiusToken

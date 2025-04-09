@@ -27,7 +27,10 @@ class BasicTest(
         self.login()  # Log into the admin interface
 
         # Navigate to the radius batch creation page
-        self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
+        try:
+            self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
+        finally:
+            self.open('/admin/openwisp_radius/radiusbatch/add/')
 
         # Set user strategy for batch creation to 'prefix'
         dropdown = self.wait_for_visibility(By.ID, 'id_strategy', 10)
@@ -75,7 +78,10 @@ class BasicTest(
         csv_file = self._get_path('static/selenium/test_standard_csv_import.csv')
 
         # Navigate to radius batch creation page
-        self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
+        try:
+            self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
+        finally:
+            self.open('/admin/openwisp_radius/radiusbatch/add/')
 
         # Set strategy to CSV for importing users
         dropdown = self.find_element(By.ID, 'id_strategy', 10)
@@ -122,7 +128,10 @@ class BasicTest(
         )
 
         # Navigate to radius batch creation page
-        self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
+        try:
+            self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
+        finally:
+            self.open('/admin/openwisp_radius/radiusbatch/add/')
 
         # Set strategy to CSV for importing users
         dropdown = self.find_element(By.ID, 'id_strategy', 10)
@@ -167,7 +176,10 @@ class BasicTest(
         csv_file = self._get_path('static/selenium/test_csv_user_generation.csv')
 
         # Navigate to radius batch creation page
-        self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
+        try:
+            self.open(reverse('admin:openwisp_radius_radiusbatch_add'))
+        finally:
+            self.open('/admin/openwisp_radius/radiusbatch/add/')
 
         # Set strategy to 'csv' for user generation
         dropdown = self.find_element(By.ID, 'id_strategy', 10)
