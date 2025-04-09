@@ -71,6 +71,7 @@ additional_fields = [
 class BrowserTest(BasicTest):
     pass
 
+
 class TestAdmin(BaseTestAdmin):
     app_label_users = 'sample_users'
     app_label = 'sample_radius'
