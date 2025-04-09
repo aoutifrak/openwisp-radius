@@ -1344,7 +1344,7 @@ class AbstractPhoneToken(TimeStampedEditableModel):
     class Meta:
         verbose_name = _('Phone verification token')
         verbose_name_plural = _('Phone verification tokens')
-        ordering = ('-created',)z
+        ordering = ('-created',)
         index_together = (('user', 'created'), ('user', 'created', 'ip'))
         abstract = True
 
